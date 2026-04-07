@@ -1,155 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LoanPay — System</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoanPay — System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- ══════════════════════════════
+  <!-- ══════════════════════════════
      PAGE 1: LOGIN
 ══════════════════════════════ -->
-<div id="loginPage" class="page active">
-  <div class="login-wrap">
-    <div class="login-card">
-      <div class="brand">
-        <div class="brand-icon">💳</div>
-        <h1>LoanPay System</h1>
-        <p>Please log in to continue</p>
+  <div id="loginPage" class="page active">
+    <div class="login-wrap">
+      <div class="login-card">
+        <div class="brand">
+          <!-- <div class="brand-icon"></div> -->
+          <h1>LoanPay System</h1>
+          <p>Please log in to continue</p>
+        </div>
+        <div class="error-msg" id="loginError">
+          ❌ Wrong username or password. Try again.
+        </div>
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter your username" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" autocomplete="off">
+        </div>
+        <button class="btn-login" onclick="doLogin()">Login</button>
       </div>
-      <div class="error-msg" id="loginError">
-        ❌ Wrong username or password. Try again.
-      </div>
-      <div class="field">
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Enter your username" autocomplete="off">
-      </div>
-      <div class="field">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" autocomplete="off">
-      </div>
-      <button class="btn-login" onclick="doLogin()">Login</button>
     </div>
   </div>
-</div>
 
-<!-- ══════════════════════════════
+  <!-- ══════════════════════════════
      PAGE 2: DASHBOARD
 ══════════════════════════════ -->
-<div id="dashPage" class="page">
+  <div id="dashPage" class="page">
 
-  <nav class="nav">
-    <div class="nav-brand">💳 LoanPay</div>
-    <div class="nav-links">
-      <!-- <button class="nav-link active" onclick="showTab('dashboard')">📋 Dashboard</button> -->
-      <!-- <button class="nav-link active" onclick="showTab('calculator')">Loan Calculator</button> -->
-    </div>
-    <div class="nav-right">
-      <span class="nav-user">👤 Admin</span>
-      <button class="btn-logout" onclick="doLogout()">Logout</button>
-    </div>
-  </nav>
-
-  
-  
-
-  <!-- ── TAB: LOAN CALCULATOR ── -->
-  <div id="tab-calculator" class="tab-content">
-    <div class="calc-wrap">
-
-      <div class="calc-header">
-        <h2>Loan Calculator</h2>
-        <p>Fill in the details below to see your repayment schedule</p>
+    <nav class="nav">
+      <div class="nav-brand">LoanPay</div>
+      <div class="nav-links">
+        <!-- <button class="nav-link active" onclick="showTab('dashboard')">📋 Dashboard</button> -->
+        <!-- <button class="nav-link active" onclick="showTab('calculator')">Loan Calculator</button> -->
       </div>
-
-      <div class="calc-card">
-        <div id="calcError" class="calc-error-msg"></div>
-
-        <div class="form-group">
-          <label>Borrower Name</label>
-          <div class="hint">Optional — appears on the table</div>
-          <input id="calc-name" type="text" placeholder="Enter Your Name">
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Start Date</label>
-            <div class="hint">Format: dd-mm-yy</div>
-            <input id="calc-date" type="text" placeholder="01-06-25">
-          </div>
-          <div class="form-group">
-            <label>Loan Amount</label>
-            <div class="hint">Total amount borrowed</div>
-            <input id="calc-amount" type="number" min="0" step="0.01" placeholder="1000">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Duration (months)</label>
-            <div class="hint">How many months to repay</div>
-            <input id="calc-duration" type="number" min="1" placeholder="12">
-          </div>
-          <div class="form-group">
-            <label>Interest Rate (%)</label>
-            <div class="hint">Monthly interest rate</div>
-            <input id="calc-interest" type="number" min="0" step="0.01" placeholder="0.01">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Repayment Method</label>
-          <div class="hint">Choose which table(s) to show</div>
-          <div class="method-tabs">
-            <button class="tab-btn active" data-method="1"><span class="tab-icon"></span>Option 1</button>
-            <button class="tab-btn" data-method="2"><span class="tab-icon"></span>Option 2</button>
-            <button class="tab-btn" data-method="3"><span class="tab-icon"></span>Option 3</button>
-            <button class="tab-btn" data-method="all"><span class="tab-icon"></span>Show All</button>
-          </div>
-        </div>
-
-        <button class="btn-calc" onclick="calculate()">▶ Calculate</button>
+      <div class="nav-right">
+        <span class="nav-user">👤 Admin</span>
+        <button class="btn-logout" onclick="doLogout()">Logout</button>
       </div>
+    </nav>
 
-      <div class="tables-section">
-        <div class="table-card" id="card1">
-          <h2>Method 1 — Fixed Interest</h2>
-          <p class="table-desc">Interest is calculated on the <strong>original loan amount</strong> every month. Same interest each period.</p>
-          <div class="summary" id="summary1"></div>
-          <div class="scroll-wrap"><table id="table1"></table></div>
+
+
+
+    <!-- ── TAB: LOAN CALCULATOR ── -->
+    <div id="tab-calculator" class="tab-content">
+      <div class="calc-wrap">
+
+        <div class="calc-header">
+          <h2>Loan Calculator</h2>
+          <p>Fill in the details below to see your repayment schedule</p>
         </div>
-        <div class="table-card" id="card2">
-          <h2>Method 2 — Reducing Balance</h2>
-          <p class="table-desc">Interest is calculated on the <strong>remaining balance</strong>. Interest decreases as you pay off the loan.</p>
-          <div class="summary" id="summary2"></div>
-          <div class="scroll-wrap"><table id="table2"></table></div>
+
+        <div class="calc-card">
+          <div id="calcError" class="calc-error-msg"></div>
+
+          <div class="form-group">
+            <label>Borrower Name</label>
+            <div class="hint">Optional — appears on the table</div>
+            <input id="calc-name" type="text" placeholder="Enter Your Name">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Start Date</label>
+              <div class="hint">Format: dd-mm-yy</div>
+              <input id="calc-date" type="text" placeholder="01-06-25">
+            </div>
+            <div class="form-group">
+              <label>Loan Amount</label>
+              <div class="hint">Total amount borrowed</div>
+              <input id="calc-amount" type="number" min="0" step="0.01" placeholder="1000">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Duration (months)</label>
+              <div class="hint">How many months to repay</div>
+              <input id="calc-duration" type="number" min="1" placeholder="12">
+            </div>
+            <div class="form-group">
+              <label>Interest Rate (%)</label>
+              <div class="hint">Monthly interest rate</div>
+              <input id="calc-interest" type="number" min="0" step="0.01" placeholder="0.01">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Repayment Method</label>
+            <div class="hint">Choose which table(s) to show</div>
+            <div class="method-tabs">
+              <button class="tab-btn active" data-method="1"><span class="tab-icon"></span>Option 1</button>
+              <button class="tab-btn" data-method="2"><span class="tab-icon"></span>Option 2</button>
+              <button class="tab-btn" data-method="3"><span class="tab-icon"></span>Option 3</button>
+              <button class="tab-btn" data-method="all"><span class="tab-icon"></span>Show All</button>
+            </div>
+          </div>
+
+          <button class="btn-calc" onclick="calculate()">Calculate</button>
         </div>
-        <div class="table-card" id="card3">
-          <h2>Method 3 — Quarterly Principal Payment</h2>
-          <p class="table-desc">Principal is paid every <strong>3 months</strong>. Interest is paid monthly on remaining balance.</p>
-          <div class="summary" id="summary3"></div>
-          <div class="scroll-wrap"><table id="table3"></table></div>
+
+        <div class="tables-section">
+          <div class="table-card" id="card1">
+            <h2>Method 1 — Option 1</h2>
+            <p class="table-desc">Interest is calculated on the <strong>original loan amount</strong> every month. Same
+              interest each period.</p>
+            <div class="summary" id="summary1"></div>
+            <div class="scroll-wrap">
+              <table id="table1"></table>
+            </div>
+          </div>
+          <div class="table-card" id="card2">
+            <h2>Method 2 — Option 2</h2>
+            <p class="table-desc">Interest is calculated on the <strong>remaining balance</strong>. Interest decreases
+              as you pay off the loan.</p>
+            <div class="summary" id="summary2"></div>
+            <div class="scroll-wrap">
+              <table id="table2"></table>
+            </div>
+          </div>
+          <div class="table-card" id="card3">
+            <h2>Method 3 — Option 3</h2>
+            <p class="table-desc">Principal is paid every <strong>3 months</strong>. Interest is paid monthly on
+              remaining balance.</p>
+            <div class="summary" id="summary3"></div>
+            <div class="scroll-wrap">
+              <table id="table3"></table>
+            </div>
+          </div>
+          <div id="emptyState" class="table-card visible" style="text-align:center; padding:40px 20px;">
+            <span style="font-size:3rem;"></span>
+            <h2 style="margin-top:12px; color:#6b7a99; font-size:1rem; font-weight:600;">Fill in the form above and
+              click <em>Calculate</em></h2>
+            <p style="color:#6b7a99; font-size:0.85rem; margin-top:6px;">Your repayment schedule will appear here</p>
+          </div>
         </div>
-        <div id="emptyState" class="table-card visible" style="text-align:center; padding:40px 20px;">
-          <span style="font-size:3rem;"></span>
-          <h2 style="margin-top:12px; color:#6b7a99; font-size:1rem; font-weight:600;">Fill in the form above and click <em>Calculate</em></h2>
-          <p style="color:#6b7a99; font-size:0.85rem; margin-top:6px;">Your repayment schedule will appear here</p>
-        </div>
+
       </div>
-
     </div>
+
   </div>
 
-</div>
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span id="toastMsg">Payment processed successfully!</span>
+  </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <span id="toastMsg">Payment processed successfully!</span>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
